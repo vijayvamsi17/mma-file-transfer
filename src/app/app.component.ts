@@ -58,7 +58,7 @@ export class AppComponent {
   public async downloadPdf(): Promise<any> {
     await this.deleteAllCachedPdfs();
 
-    if (!this.currentDir) {
+    if (!this.currentDir) {                // If this condition is removed, file will download as expected. Not able to find the dir if it already exist
       await this.createMMADirectory();
     }
 
