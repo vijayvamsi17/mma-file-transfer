@@ -58,7 +58,7 @@ export class AppComponent {
 
     const headers = {};
 
-    const url = encodeURI("https://www.bcbsm.com/content/dam/public/Consumer/Documents/help/calculators-tools/bcn-member-reimbursement-form.pdf");
-    return this.fileTransfer.download(url, this.currentDir.nativeURL + "Test.pdf", true);
+    const url = "https://www.bcbsm.com/content/dam/public/Consumer/Documents/help/calculators-tools/bcn-member-reimbursement-form.pdf";
+    return this.fileTransfer.download(url, this.currentDir.nativeURL + "Test.pdf");
   }
 }
