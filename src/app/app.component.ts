@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { File, DirectoryEntry, Entry, IWriteOptions } from '@ionic-native/File/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { Platform } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
     private file: File,
     private platform: Platform,
     private fileTransferService: FileTransfer,
+    private socialShare: SocialSharing
   ) {
     this.platform.ready().then(() => {
       this.createMMADirectory();
@@ -41,8 +43,12 @@ export class AppComponent {
   }
 
   public async shareFile() {
-    this.downloadPdf().then(response => {
-      console.log(response);
+    this.downloadPdf().then(async resp => {
+      const localURL = resp.toURL();
+      const benefitDocumentShared = await this.share({
+        subject: "Test subject",
+        fileToShare: localURL
+      });
 
     }).catch(err => {
       console.error(err);
@@ -60,5 +66,12 @@ export class AppComponent {
 
     const url = "https://www.bcbsm.com/content/dam/public/Consumer/Documents/help/calculators-tools/bcn-member-reimbursement-form.pdf";
     return this.fileTransfer.download(url, this.currentDir.nativeURL + "Test.pdf");
+  }
+
+  async share({ message = null, subject = "Test subject", fileToShare, url = null }: {
+    message?: string, subject?: string,
+    fileToShare?: string | string[], url?: string
+  } = {}): Promise<any> {
+    return await this.socialShare.share(message, subject, fileToShare, url);
   }
 }
