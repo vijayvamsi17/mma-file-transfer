@@ -1,0 +1,7 @@
+{
+  "name": "mma-file-transfer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "mma-file-transfer",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
